@@ -1,0 +1,29 @@
+{
+  "player": {
+    "class": "Knight",
+    "x": 395,
+    "y": 305,
+    "vitality": 100,
+    "max_vitality": 100,
+    "current_armor": 0,
+    "attack_power": 20,
+    "inventory": []
+  },
+  "king": {
+    "x": 336,
+    "y": 263,
+    "vitality": 80,
+    "is_alive": true
+  },
+  "level": {
+    "current_room": "ambush area",
+    "visited_rooms": [
+      "ambush area"
+    ],
+    "unlocked_doors": [],
+    "bandit_camp_cleared": false,
+    "cleared_enemy_rooms": [],
+    "opened_chests": [],
+    "collected_items": []
+  }
+}
