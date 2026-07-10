@@ -1,8 +1,8 @@
 {
   "player": {
     "class": "Knight",
-    "x": 395,
-    "y": 305,
+    "x": 40,
+    "y": 235,
     "vitality": 100,
     "max_vitality": 100,
     "current_armor": 0,
@@ -10,8 +10,8 @@
     "inventory": []
   },
   "king": {
-    "x": 336,
-    "y": 263,
+    "x": 120,
+    "y": 183,
     "vitality": 80,
     "is_alive": true
   },

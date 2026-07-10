@@ -1,6 +1,6 @@
 import pygame
 from item import ITEM_DATA, Item
-from config import SCREEN_WIDTH, SCREEN_HEIGHT, WHITE, BLACK
+from config import WHITE, BLACK
 
 class DialogueBox:
     def __init__(self):
@@ -12,10 +12,22 @@ class DialogueBox:
         self.char_timer = 0
         self.char_speed = 30
 
-        self._name_font = pygame.font.SysFont("arial", 20, bold=True)
-        self._text_font = pygame.font.SysFont("arial", 18)
-        self._hint_font = pygame.font.SysFont("arial", 14)
+        self.scale_x = 1.0
+        self.scale_y = 1.0
+        self._init_fonts()
+
+    def _init_fonts(self):
+        sx = self.scale_x; sy = self.scale_y; s = min(sx, sy)
+        self._name_font = pygame.font.SysFont("arial", int(20*s), bold=True)
+        self._text_font = pygame.font.SysFont("arial", int(18*s))
+        self._hint_font = pygame.font.SysFont("arial", int(14*s))
         self._hint_surf = self._hint_font.render("Press E to continue", True, (160, 160, 160))
+
+    def update_scale(self, scale_x, scale_y):
+        if self.scale_x != scale_x or self.scale_y != scale_y:
+            self.scale_x = scale_x
+            self.scale_y = scale_y
+            self._init_fonts()
 
     def show(self, speaker, text):
         self.active = True
@@ -46,20 +58,21 @@ class DialogueBox:
         if not self.active:
             return
 
-        box_h = 110
-        box_y = SCREEN_HEIGHT - box_h - 10
-        box_x = 20
-        box_w = SCREEN_WIDTH - 40
+        sx = self.scale_x; sy = self.scale_y
+        box_h = int(110 * sy)
+        box_y = surface.get_height() - box_h - int(10 * sy)
+        box_x = int(20 * sx)
+        box_w = surface.get_width() - int(40 * sx)
 
         bg = pygame.Surface((box_w, box_h), pygame.SRCALPHA)
         bg.fill((10, 10, 30, 220))
         surface.blit(bg, (box_x, box_y))
-        pygame.draw.rect(surface, (200, 180, 100), (box_x, box_y, box_w, box_h), 2)
+        pygame.draw.rect(surface, (200, 180, 100), (box_x, box_y, box_w, box_h), max(1, int(2*sx)))
 
         name_surf = self._name_font.render(self.speaker, True, (255, 220, 100))
-        surface.blit(name_surf, (box_x + 14, box_y + 8))
+        surface.blit(name_surf, (box_x + int(14*sx), box_y + int(8*sy)))
 
-        max_w = box_w - 28
+        max_w = box_w - int(28*sx)
         words = self.displayed_text.split()
         lines, current = [], ""
         for word in words:
@@ -72,23 +85,21 @@ class DialogueBox:
         if current:
             lines.append(current)
 
-        y = box_y + 34
+        y = box_y + int(34*sy)
         for line in lines[:3]:
             txt = self._text_font.render(line, True, (230, 230, 230))
-            surface.blit(txt, (box_x + 14, y))
+            surface.blit(txt, (box_x + int(14*sx), y))
             y += self._text_font.get_linesize()
 
-        surface.blit(self._hint_surf, (box_x + box_w - self._hint_surf.get_width() - 14,
-                                       box_y + box_h - 22))
+        surface.blit(self._hint_surf, (box_x + box_w - self._hint_surf.get_width() - int(14*sx),
+                                       box_y + box_h - int(22*sy)))
 
 
 class UI:
     def __init__(self):
-        self.font = pygame.font.SysFont("arial", 22)
-        self.small_font = pygame.font.SysFont("arial", 18)
-        self.title_font = pygame.font.SysFont("arial", 32, bold=True)
-        self.room_font = pygame.font.SysFont("arial", 20, bold=True)
-        self.mini_font = pygame.font.SysFont("arial", 10)
+        self.scale_x = 1.0
+        self.scale_y = 1.0
+        self._init_fonts()
 
         self.show_inventory = False
         self.show_big_map = False
@@ -97,10 +108,24 @@ class UI:
         self.feedback_timer = 0
         self.feedback_duration = 2500
 
+    def _init_fonts(self):
+        sx = self.scale_x; sy = self.scale_y; s = min(sx, sy)
+        self.font = pygame.font.SysFont("arial", int(22*s))
+        self.small_font = pygame.font.SysFont("arial", int(18*s))
+        self.title_font = pygame.font.SysFont("arial", int(32*s), bold=True)
+        self.room_font = pygame.font.SysFont("arial", int(20*s), bold=True)
+        self.mini_font = pygame.font.SysFont("arial", max(10, int(10*s)))
+
         self._inv_title = self.title_font.render("INVENTORY", True, (255, 215, 0))
         self._inv_hint = self.small_font.render("1/2/3 use  |  I close", True, (160, 160, 160))
         self._inv_empty = self.font.render("Your inventory is empty.", True, (140, 140, 140))
         self._ready_surf = self.small_font.render("READY", True, (100, 255, 100))
+
+    def update_scale(self, scale_x, scale_y):
+        if self.scale_x != scale_x or self.scale_y != scale_y:
+            self.scale_x = scale_x
+            self.scale_y = scale_y
+            self._init_fonts()
 
     def show_feedback(self, message):
         self.feedback_msg = message
@@ -113,7 +138,8 @@ class UI:
         self.show_big_map = not self.show_big_map
 
     def draw_health_bar(self, surface, player):
-        bx, by, bw, bh = 20, 20, 200, 22
+        sx = self.scale_x; sy = self.scale_y; s = min(sx, sy)
+        bx, by, bw, bh = int(20*sx), int(20*sy), int(200*sx), int(22*sy)
         ratio = max(0, player.vitality / player.max_vitality)
 
         pygame.draw.rect(surface, (180, 40, 40), (bx, by, bw, bh))
@@ -124,7 +150,8 @@ class UI:
         surface.blit(txt, txt.get_rect(center=(bx + bw // 2, by + bh // 2)))
 
     def draw_armor_bar(self, surface, player):
-        bx, by, bw, bh = 20, 48, 200, 16
+        sx = self.scale_x; sy = self.scale_y; s = min(sx, sy)
+        bx, by, bw, bh = int(20*sx), int(48*sy), int(200*sx), int(16*sy)
         ratio = player.current_armor / player.max_armor if player.max_armor else 0
 
         pygame.draw.rect(surface, (60, 60, 100), (bx, by, bw, bh))
@@ -135,7 +162,8 @@ class UI:
         surface.blit(txt, txt.get_rect(center=(bx + bw // 2, by + bh // 2)))
 
     def draw_cooldown(self, surface, player):
-        bx, by, bw, bh = 20, 70, 200, 10
+        sx = self.scale_x; sy = self.scale_y; s = min(sx, sy)
+        bx, by, bw, bh = int(20*sx), int(70*sy), int(200*sx), int(10*sy)
         now = pygame.time.get_ticks()
         elapsed = now - player.last_attack_time
         ratio = min(1.0, elapsed / player.attack_cooldown)
@@ -164,25 +192,26 @@ class UI:
         name = level.get_current_room_name()
         title_surf = self.title_font.render(name, True, (255, 230, 150))
         title_surf.set_alpha(alpha)
+        sx = self.scale_x; sy = self.scale_y
         title_x = (surface.get_width() - title_surf.get_width()) // 2
-        title_y = 40
+        title_y = int(40 * sy)
         surface.blit(title_surf, (title_x, title_y))
 
         if is_new:
             discovery_surf = self.small_font.render("New Area Discovered!", True, (150, 255, 150))
             discovery_surf.set_alpha(alpha)
             disc_x = (surface.get_width() - discovery_surf.get_width()) // 2
-            disc_y = title_y + title_surf.get_height() + 5
+            disc_y = title_y + title_surf.get_height() + int(5 * sy)
             surface.blit(discovery_surf, (disc_x, disc_y))
 
         if not desc:
             return
 
-        max_w, padding = 600, 12
+        max_w, padding_x, padding_y = int(600 * sx), int(12 * sx), int(12 * sy)
         lines, current = [], ""
         for word in desc.split():
             test = (current + " " + word).strip()
-            if self.small_font.size(test)[0] <= max_w - padding * 2:
+            if self.small_font.size(test)[0] <= max_w - padding_x * 2:
                 current = test
             else:
                 lines.append(current)
@@ -191,9 +220,9 @@ class UI:
             lines.append(current)
 
         line_h = self.small_font.get_linesize()
-        bh = line_h * len(lines) + padding * 2
+        bh = line_h * len(lines) + padding_y * 2
         bx = (surface.get_width() - max_w) // 2
-        by = surface.get_height() - bh - 70
+        by = surface.get_height() - bh - int(70 * sy)
 
         bg = pygame.Surface((max_w, bh), pygame.SRCALPHA)
         bg.fill((0, 0, 0, min(alpha, 180)))
@@ -202,13 +231,14 @@ class UI:
         for i, line in enumerate(lines):
             txt = self.small_font.render(line, True, (230, 215, 170))
             txt.set_alpha(alpha)
-            surface.blit(txt, (bx + padding, by + padding + i * line_h))
+            surface.blit(txt, (bx + padding_x, by + padding_y + i * line_h))
 
     def draw_inventory(self, surface, player):
         if not self.show_inventory:
             return
 
-        iw, ih = 420, 320
+        sx = self.scale_x; sy = self.scale_y; s = min(sx, sy)
+        iw, ih = int(420*sx), int(320*sy)
         ix = (surface.get_width() - iw) // 2
         iy = (surface.get_height() - ih) // 2
 
@@ -217,12 +247,12 @@ class UI:
         surface.blit(bg, (ix, iy))
         pygame.draw.rect(surface, (200, 200, 200), (ix, iy, iw, ih), 2)
 
-        surface.blit(self._inv_title, (ix + (iw - self._inv_title.get_width()) // 2, iy + 14))
-        surface.blit(self._inv_hint, (ix + 120, iy + 52))
+        surface.blit(self._inv_title, (ix + (iw - self._inv_title.get_width()) // 2, iy + int(14 * sy)))
+        surface.blit(self._inv_hint, (ix + int(120 * sx), iy + int(52 * sy)))
 
-        start_y = iy + 82
+        start_y = iy + int(82 * sy)
         if not player.inventory:
-            surface.blit(self._inv_empty, (ix + 30, start_y))
+            surface.blit(self._inv_empty, (ix + int(30 * sx), start_y))
             return
 
         counts = {}
@@ -238,24 +268,24 @@ class UI:
 
             img = Item._images.get(name)
             if img:
-                surface.blit(pygame.transform.scale(img, (20, 20)), (ix + 13, start_y + 1))
+                surface.blit(pygame.transform.scale(img, (int(20*sx), int(20*sy))), (ix + int(13 * sx), start_y + int(1 * sy)))
             else:
-                pygame.draw.rect(surface, color, (ix + 16, start_y + 4, 14, 14))
-                pygame.draw.rect(surface, WHITE, (ix + 16, start_y + 4, 14, 14), 1)
+                pygame.draw.rect(surface, color, (ix + int(16 * sx), start_y + int(4 * sy), int(14 * sx), int(14 * sy)))
+                pygame.draw.rect(surface, WHITE, (ix + int(16 * sx), start_y + int(4 * sy), int(14 * sx), int(14 * sy)), max(1, int(1*sx)))
 
             label = f"{idx + 1}. {display}" + (f"  (x{count})" if count > 1 else "")
-            surface.blit(self.font.render(label, True, WHITE), (ix + 36, start_y))
+            surface.blit(self.font.render(label, True, WHITE), (ix + int(36 * sx), start_y))
 
             if effect:
                 eff_str = "  ".join(f"+{v} {k.upper()}" for k, v in effect.items())
-                surface.blit(self.small_font.render(eff_str, True, (140, 230, 140)), (ix + 36, start_y + 22))
+                surface.blit(self.small_font.render(eff_str, True, (140, 230, 140)), (ix + int(36 * sx), start_y + int(22 * sy)))
             else:
                 desc = data.get("desc", "")
                 surface.blit(self.small_font.render(desc[:55] + ("…" if len(desc) > 55 else ""),
                                                     True, (160, 160, 160)),
-                             (ix + 36, start_y + 22))
+                             (ix + int(36 * sx), start_y + int(22 * sy)))
 
-            start_y += 54
+            start_y += int(54 * sy)
 
     def draw_feedback(self, surface):
         if not self.feedback_msg:
@@ -271,26 +301,27 @@ class UI:
 
         txt = self.font.render(self.feedback_msg, True, (255, 240, 100))
         txt.set_alpha(alpha)
-        surface.blit(txt, (surface.get_width() // 2 - txt.get_width() // 2, surface.get_height() - 46))
+        surface.blit(txt, (surface.get_width() // 2 - txt.get_width() // 2, surface.get_height() - int(46 * self.scale_y)))
 
     def draw_merchant(self, surface, player):
-        mw, mh = 500, 340
+        sx = self.scale_x; sy = self.scale_y
+        mw, mh = int(500*sx), int(340*sy)
         mx = (surface.get_width() - mw) // 2
         my = (surface.get_height() - mh) // 2
 
         bg = pygame.Surface((mw, mh), pygame.SRCALPHA)
         bg.fill((20, 15, 30, 220))
         surface.blit(bg, (mx, my))
-        pygame.draw.rect(surface, (200, 160, 50), (mx, my, mw, mh), 3)
+        pygame.draw.rect(surface, (200, 160, 50), (mx, my, mw, mh), max(1, int(3*sx)))
 
-        surface.blit(self.title_font.render("MERCHANT", True, (255, 215, 0)),
-                     (mx + (mw - self.title_font.size("MERCHANT")[0]) // 2, my + 14))
+        title = self.title_font.render("MERCHANT", True, (255, 215, 0))
+        surface.blit(title, (mx + (mw - title.get_width()) // 2, my + int(14*sy)))
 
         has_coin = "gold coin" in player.inventory
 
         if has_coin:
             surface.blit(self.font.render("You have a Gold Coin. Choose a trade:", True, WHITE),
-                         (mx + 20, my + 65))
+                         (mx + int(20*sx), my + int(65*sy)))
             options = [
                 ("1. Sharpen Sword   (+10 ATK)", (255, 180, 100)),
                 ("2. Reinforced Armor (+50 Armor)", (100, 180, 255)),
@@ -298,12 +329,12 @@ class UI:
                 ("4. Leave", (160, 160, 160)),
             ]
             for i, (text, color) in enumerate(options):
-                surface.blit(self.font.render(text, True, color), (mx + 40, my + 110 + i * 48))
+                surface.blit(self.font.render(text, True, color), (mx + int(40*sx), my + int(110*sy) + i * int(48*sy)))
         else:
             surface.blit(self.font.render("You have no Gold Coin. Come back later.", True, (200, 120, 120)),
-                         (mx + 30, my + 120))
+                         (mx + int(30*sx), my + int(120*sy)))
             surface.blit(self.small_font.render("Press E to leave.", True, (160, 160, 160)),
-                         (mx + 30, my + 175))
+                         (mx + int(30*sx), my + int(175*sy)))
 
     def draw_minimap(self, surface, level):
         positions = level.room_positions
@@ -313,8 +344,9 @@ class UI:
         if not positions:
             return
 
-        cell_w, cell_h = 14, 10
-        gap = 2
+        sx = self.scale_x; sy = self.scale_y; s = min(sx, sy)
+        cell_w, cell_h = int(14*sx), int(10*sy)
+        gap = max(1, int(2*s))
         step_x = cell_w + gap
         step_y = cell_h + gap
 
@@ -325,8 +357,8 @@ class UI:
 
         map_w = (max_x - min_x + 1) * step_x + 12
         map_h = (max_y - min_y + 1) * step_y + 12
-        base_x = SCREEN_WIDTH - map_w - 8
-        base_y = SCREEN_HEIGHT - map_h - 8
+        base_x = surface.get_width() - map_w - 8
+        base_y = surface.get_height() - map_h - 8
 
         bg = pygame.Surface((map_w, map_h), pygame.SRCALPHA)
         bg.fill((0, 0, 0, 140))
@@ -398,12 +430,13 @@ class UI:
                 if nxt and nxt not in visited and nxt in positions:
                     adjacent_unvisited.add(nxt)
 
-        overlay = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SRCALPHA)
+        overlay = pygame.Surface((surface.get_width(), surface.get_height()), pygame.SRCALPHA)
         overlay.fill((0, 0, 0, 180))
         surface.blit(overlay, (0, 0))
 
-        cell_w, cell_h = 36, 24
-        gap = 6
+        sx = self.scale_x; sy = self.scale_y; s = min(sx, sy)
+        cell_w, cell_h = int(36*sx), int(24*sy)
+        gap = max(1, int(6*s))
         step_x = cell_w + gap
         step_y = cell_h + gap
 
@@ -414,12 +447,12 @@ class UI:
 
         total_w = (max_x - min_x + 1) * step_x
         total_h = (max_y - min_y + 1) * step_y
-        base_x = (SCREEN_WIDTH - total_w) // 2
-        base_y = (SCREEN_HEIGHT - total_h) // 2
+        base_x = (surface.get_width() - total_w) // 2
+        base_y = (surface.get_height() - total_h) // 2
 
         title = self.room_font.render("MAP  (Tab to close)", True, (255, 230, 150))
         title_y = max(6, base_y - 36)
-        surface.blit(title, (SCREEN_WIDTH // 2 - title.get_width() // 2, title_y))
+        surface.blit(title, (surface.get_width() // 2 - title.get_width() // 2, title_y))
 
         drawn_connections = set()
         for room_name, (gx, gy) in positions.items():

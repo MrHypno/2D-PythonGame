@@ -1256,6 +1256,7 @@ class Level:
         self.cleared_enemy_rooms = set()
         self.opened_chests       = set()
         self.collected_items     = set()
+        self.guard_room_state    = None
 
         self.room_positions = {}
         self._compute_room_positions()
@@ -1477,7 +1478,25 @@ class Level:
         self.active_npcs = [NPC(d["x"], d["y"], d["type"]) for d in room.get("npcs", [])]
 
         if room.get("guard_room"):
-            self.active_guard = Guard(400, 60, is_riddle_guard=True)
+            if self.guard_room_state:
+                gs = self.guard_room_state
+                self.active_guard = Guard(gs["guard_x"], gs["guard_y"], is_riddle_guard=True)
+                self.active_guard.is_hostile = gs["guard_hostile"]
+                self.active_guard.hp = gs["guard_hp"]
+                self.active_guard.gate_open = gs["gate_open"]
+                self.active_guard.asked_already = gs["asked_already"]
+                self.active_guard.mistakes = gs["mistakes"]
+                if gs["guard_dead"]:
+                    self.active_guard = None
+                saved_npcs = gs.get("npcs", [])
+                self.active_npcs = []
+                for nd in saved_npcs:
+                    npc = NPC(nd["x"], nd["y"], nd["type"])
+                    npc.is_hostile = nd["hostile"]
+                    npc.hp = nd["hp"]
+                    self.active_npcs.append(npc)
+            else:
+                self.active_guard = Guard(400, 60, is_riddle_guard=True)
         else:
             self.active_guard = None
 
@@ -1552,7 +1571,31 @@ class Level:
         except Exception:
             return None
 
+    def _save_guard_room_state(self):
+        if self.current_room_name != "guards":
+            return
+        guard = self.active_guard
+        gs = {
+            "guard_dead": guard is None,
+            "guard_x": guard.hitbox.x if guard else 0,
+            "guard_y": guard.hitbox.y if guard else 0,
+            "guard_hostile": guard.is_hostile if guard else False,
+            "guard_hp": guard.hp if guard else 0,
+            "gate_open": guard.gate_open if guard else False,
+            "asked_already": guard.asked_already if guard else True,
+            "mistakes": guard.mistakes if guard else 0,
+            "npcs": [],
+        }
+        for npc in self.active_npcs:
+            gs["npcs"].append({
+                "x": int(npc.hitbox.x), "y": int(npc.hitbox.y),
+                "type": npc.npc_type,
+                "hostile": npc.is_hostile, "hp": npc.hp,
+            })
+        self.guard_room_state = gs
+
     def _do_change_room(self, direction, next_name, player):
+        self._save_guard_room_state()
         self.load_room(next_name)
         room = self.world_maps[next_name]
         room_map = room["map"]

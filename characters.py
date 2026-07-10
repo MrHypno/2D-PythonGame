@@ -1,7 +1,14 @@
 import pygame
 import math
 import random
-from config import SCREEN_WIDTH
+from config import SCREEN_WIDTH, SCREEN_HEIGHT
+
+_FONT_CACHE = {}
+def get_sys_font(name, size, bold=False):
+    key = (name, size, bold)
+    if key not in _FONT_CACHE:
+        _FONT_CACHE[key] = pygame.font.SysFont(name, size, bold=bold)
+    return _FONT_CACHE[key]
 
 KING_COLOR = (220, 180, 50)
 KING_OUTLINE = (255, 230, 100)
@@ -116,18 +123,17 @@ class King:
             pygame.draw.rect(surface, color, self.image_rect)
             pygame.draw.rect(surface, KING_OUTLINE, self.image_rect, 2)
 
-        surface.blit(self._label_surf, (self.image_rect.centerx - self._label_surf.get_width() // 2, self.image_rect.top - 18))
-
-    def draw_hp_bar(self, surface):
-        bar_x, bar_y = surface.get_width() - 220, 50
-        bar_w, bar_h = 200, 16
+    def draw_hp_bar(self, surface, sx=1.0, sy=1.0):
+        bar_x, bar_y = surface.get_width() - int(220*sx), int(50*sy)
+        bar_w, bar_h = int(200*sx), max(1, int(16*sy))
         ratio = max(0, self.vitality / self.max_vitality)
 
         pygame.draw.rect(surface, (120, 80, 0), (bar_x, bar_y, bar_w, bar_h))
         pygame.draw.rect(surface, (220, 180, 50), (bar_x, bar_y, int(bar_w * ratio), bar_h))
-        pygame.draw.rect(surface, (255, 230, 100), (bar_x, bar_y, bar_w, bar_h), 2)
+        pygame.draw.rect(surface, (255, 230, 100), (bar_x, bar_y, bar_w, bar_h), max(1, int(2*sx)))
 
-        txt = self._bar_font.render(f"King Vitality  {self.vitality}/{self.max_vitality}", True, (255, 240, 180))
+        font = get_sys_font("arial", max(1, int(16 * min(sx, sy))), bold=True)
+        txt = font.render(f"King Vitality  {self.vitality}/{self.max_vitality}", True, (255, 240, 180))
         surface.blit(txt, txt.get_rect(center=(bar_x + bar_w // 2, bar_y + bar_h // 2)))
 
 
@@ -296,19 +302,25 @@ class Guard:
             pygame.draw.rect(surface, color, self.image_rect)
             pygame.draw.rect(surface, (255, 255, 255), self.image_rect, 2)
 
-        surface.blit(self._label_surf, (self.image_rect.centerx - self._label_surf.get_width() // 2, self.image_rect.top - 18))
+        # label moved to draw_ui
 
-        # hp bar only when hostil
+    def draw_ui(self, surface, sx=1.0, sy=1.0):
+        font = get_sys_font("arial", max(1, int(13 * min(sx, sy))), bold=True)
+        label_surf = font.render("GUARD", True, (255, 255, 255))
+        lx = int(self.image_rect.centerx * sx) - label_surf.get_width() // 2
+        ly = int((self.image_rect.top - 18) * sy)
+        surface.blit(label_surf, (lx, ly))
+
         if self.is_hostile:
-            bar_w = self.image_rect.width
-            bar_h = 5
-            bar_x = self.image_rect.left
-            bar_y = self.image_rect.bottom + 3
+            bar_w = int(self.image_rect.width * sx)
+            bar_h = max(1, int(5 * sy))
+            bar_x = int(self.image_rect.left * sx)
+            bar_y = int((self.image_rect.bottom + 3) * sy)
             ratio = max(0, self.hp / self.max_vitality)
 
             pygame.draw.rect(surface, (120, 0, 0), (bar_x, bar_y, bar_w, bar_h))
             pygame.draw.rect(surface, (220, 50, 50), (bar_x, bar_y, int(bar_w * ratio), bar_h))
-            pygame.draw.rect(surface, (255, 255, 255), (bar_x, bar_y, bar_w, bar_h), 1)
+            pygame.draw.rect(surface, (255, 255, 255), (bar_x, bar_y, bar_w, bar_h), max(1, int(1*sx)))
 
 
 NPC_COLORS = {
@@ -511,16 +523,22 @@ class NPC:
             pygame.draw.rect(surface, color, self.image_rect)
             pygame.draw.rect(surface, (255, 255, 255), self.image_rect, 2)
 
-        surface.blit(self._label_surf, (self.image_rect.centerx - self._label_surf.get_width() // 2, self.image_rect.top - 18))
+        # label moved to draw_ui
 
-        # hp bar only when hostile
+    def draw_ui(self, surface, sx=1.0, sy=1.0):
+        font = get_sys_font("arial", max(1, int(13 * min(sx, sy))), bold=True)
+        label_surf = font.render(getattr(self, 'label', 'GUARD'), True, (255, 255, 255))
+        lx = int(self.image_rect.centerx * sx) - label_surf.get_width() // 2
+        ly = int((self.image_rect.top - 18) * sy)
+        surface.blit(label_surf, (lx, ly))
+
         if self.is_hostile:
-            bar_w = self.image_rect.width
-            bar_h = 5
-            bar_x = self.image_rect.left
-            bar_y = self.image_rect.bottom + 3
+            bar_w = int(self.image_rect.width * sx)
+            bar_h = max(1, int(5 * sy))
+            bar_x = int(self.image_rect.left * sx)
+            bar_y = int((self.image_rect.bottom + 3) * sy)
             ratio = max(0, self.hp / self.max_vitality)
 
             pygame.draw.rect(surface, (120, 0, 0), (bar_x, bar_y, bar_w, bar_h))
             pygame.draw.rect(surface, (220, 50, 50), (bar_x, bar_y, int(bar_w * ratio), bar_h))
-            pygame.draw.rect(surface, (255, 255, 255), (bar_x, bar_y, bar_w, bar_h), 1)
+            pygame.draw.rect(surface, (255, 255, 255), (bar_x, bar_y, bar_w, bar_h), max(1, int(1*sx)))

@@ -12,52 +12,92 @@ from save_system import save_game, load_game, has_save
 pygame.init()
 pygame.mixer.init()
 pygame.joystick.init()
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+screen = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
+display_surface = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Save the King!")
 clock = pygame.time.Clock()
+is_fullscreen = False
 
 chest_open = pygame.mixer.Sound("assets/sounds/chest_open.wav")
 
-title_font = pygame.font.SysFont("arial", 64, bold=True)
-menu_font  = pygame.font.SysFont("arial", 32)
-small_font = pygame.font.SysFont("arial", 20)
-input_font = pygame.font.SysFont("arial", 24)
+ui_scale_x = 1.0
+ui_scale_y = 1.0
+
+def _get_font(name, size, bold=False):
+    return pygame.font.SysFont(name, max(1, int(size * min(ui_scale_x, ui_scale_y))), bold=bold)
+
+title_font = lambda: _get_font("arial", 64, bold=True)
+menu_font  = lambda: _get_font("arial", 32)
+small_font = lambda: _get_font("arial", 20)
+input_font = lambda: _get_font("arial", 24)
 inputs = ButtonMapping()
 
-def draw_text(text, font, color, x, y):
-    screen.blit(font.render(text, True, color), (x, y))
+def draw_text(text, font, color, x, y, center_x=False):
+    sx, sy = ui_scale_x, ui_scale_y
+    txt = font().render(text, True, color)
+    dx = (display_surface.get_width() - txt.get_width()) // 2 if center_x else int(x*sx)
+    display_surface.blit(txt, (dx, int(y*sy)))
 
-def draw_button(rect, text, font, hovered):
+def draw_button(rect, text, font, hovered, center_x=False):
+    sx, sy = ui_scale_x, ui_scale_y
+    s = min(sx, sy)
+    rw = int(rect.w * sx)
+    rh = int(rect.h * sy)
+    rx = (display_surface.get_width() - rw) // 2 if center_x else int(rect.x * sx)
+    ry = int(rect.y * sy)
+    s_rect = pygame.Rect(rx, ry, rw, rh)
     color = GREEN if hovered else GRAY
-    pygame.draw.rect(screen, color, rect, border_radius=8)
-    pygame.draw.rect(screen, WHITE, rect, 2, border_radius=8)
-    txt = font.render(text, True, WHITE)
-    screen.blit(txt, txt.get_rect(center=rect.center))
+    pygame.draw.rect(display_surface, color, s_rect, border_radius=int(8*s))
+    pygame.draw.rect(display_surface, WHITE, s_rect, max(1, int(2*s)), border_radius=int(8*s))
+    txt = font().render(text, True, WHITE)
+    display_surface.blit(txt, txt.get_rect(center=s_rect.center))
 
 def quit_game():
     pygame.quit()
     sys.exit()
 
 def toggle_fullscreen():
-    pygame.display.toggle_fullscreen()
+    global display_surface, is_fullscreen, ui_scale_x, ui_scale_y
+    is_fullscreen = not is_fullscreen
+    if is_fullscreen:
+        display_surface = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+        ui_scale_x = display_surface.get_width() / SCREEN_WIDTH
+        ui_scale_y = display_surface.get_height() / SCREEN_HEIGHT
+    else:
+        display_surface = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+        ui_scale_x = 1.0
+        ui_scale_y = 1.0
+    pygame.display.set_caption("Save the King!")
+
+def get_mouse_pos():
+    mx, my = pygame.mouse.get_pos()
+    return int(mx / ui_scale_x), int(my / ui_scale_y)
+
+def update_display():
+    if is_fullscreen:
+        pygame.transform.smoothscale(screen, display_surface.get_size(), display_surface)
+    else:
+        display_surface.blit(screen, (0, 0))
 
 def run_main_menu(ctx):
     while True:
         screen.fill((20, 20, 40))
-        draw_text("SAVE THE KING!", title_font, WHITE, 150, 120)
-        mx, my = pygame.mouse.get_pos()
+        update_display()
+        draw_text("SAVE THE KING!", title_font, WHITE, 150, 120, center_x=True)
+        mx, my = get_mouse_pos()
         btn_play = pygame.Rect(300, 250, 200, 55)
         btn_load = pygame.Rect(300, 330, 200, 55)
         btn_quit = pygame.Rect(300, 410, 200, 55)
-        draw_button(btn_play, "PLAY", menu_font, btn_play.collidepoint(mx, my))
+        draw_button(btn_play, "PLAY", menu_font, btn_play.collidepoint(mx, my), center_x=True)
         save_exists = has_save()
         if save_exists:
-            draw_button(btn_load, "LOAD GAME", menu_font, btn_load.collidepoint(mx, my))
+            draw_button(btn_load, "LOAD GAME", menu_font, btn_load.collidepoint(mx, my), center_x=True)
         else:
-            pygame.draw.rect(screen, (60, 60, 60), btn_load, border_radius=8)
-            dim_surf = menu_font.render("LOAD GAME", True, (80, 80, 80))
-            screen.blit(dim_surf, dim_surf.get_rect(center=btn_load.center))
-        draw_button(btn_quit, "QUIT", menu_font, btn_quit.collidepoint(mx, my))
+            s_rect = pygame.Rect((display_surface.get_width() - int(btn_load.w * ui_scale_x)) // 2, int(btn_load.y * ui_scale_y), int(btn_load.w * ui_scale_x), int(btn_load.h * ui_scale_y))
+            pygame.draw.rect(display_surface, (60, 60, 60), s_rect, border_radius=int(8 * min(ui_scale_x, ui_scale_y)))
+            dim_surf = menu_font().render("LOAD GAME", True, (80, 80, 80))
+            display_surface.blit(dim_surf, dim_surf.get_rect(center=s_rect.center))
+        draw_button(btn_quit, "QUIT", menu_font, btn_quit.collidepoint(mx, my), center_x=True)
         click = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT: return "quit"
@@ -69,7 +109,7 @@ def run_main_menu(ctx):
             elif btn_load.collidepoint(mx, my) and save_exists:
                 ctx["load_save"] = True; return "playing"
             elif btn_quit.collidepoint(mx, my): return "quit"
-        pygame.display.update(); clock.tick(FPS)
+        pygame.display.flip(); clock.tick(FPS)
 
 def run_character_select(ctx):
     try:
@@ -80,33 +120,38 @@ def run_character_select(ctx):
         char_sprite = None
     while True:
         screen.fill((20, 20, 40))
-        draw_text("Choose Your Class", title_font, (255, 220, 80), 130, 60)
-        mx, my = pygame.mouse.get_pos()
+        
         kb = pygame.Rect(80, 180, 280, 300)
         ab = pygame.Rect(440, 180, 280, 300)
         pygame.draw.rect(screen, (40, 40, 80), kb, border_radius=12)
+        mx, my = get_mouse_pos()
         pygame.draw.rect(screen, GREEN if kb.collidepoint(mx, my) else (100, 100, 160), kb, 3, border_radius=12)
         if char_sprite:
             screen.blit(char_sprite, (172, 200))
         else:
             pygame.draw.rect(screen, (100, 120, 200), pygame.Rect(190, 210, 60, 90))
-        draw_text("KNIGHT", menu_font, WHITE, 145, 315)
-        draw_text("Vitality:    100", small_font, (100, 220, 100), 110, 360)
-        draw_text("ATK:    20", small_font, (220, 100, 100), 110, 385)
-        draw_text("Melee attack", small_font, (180, 180, 220), 110, 415)
-        draw_text("High vitality", small_font, (180, 180, 220), 110, 440)
+            
         pygame.draw.rect(screen, (40, 40, 80), ab, border_radius=12)
         pygame.draw.rect(screen, GREEN if ab.collidepoint(mx, my) else (100, 100, 160), ab, 3, border_radius=12)
         if char_sprite:
             screen.blit(char_sprite, (532, 200))
         else:
             pygame.draw.rect(screen, (80, 180, 80), pygame.Rect(550, 210, 60, 90))
+            
+        update_display()
+        
+        draw_text("Choose Your Class", title_font, (255, 220, 80), 130, 60, center_x=True)
+        draw_text("KNIGHT", menu_font, WHITE, 145, 315)
+        draw_text("Vitality:    100", small_font, (100, 220, 100), 110, 360)
+        draw_text("ATK:    20", small_font, (220, 100, 100), 110, 385)
+        draw_text("Melee attack", small_font, (180, 180, 220), 110, 415)
+        draw_text("High vitality", small_font, (180, 180, 220), 110, 440)
         draw_text("ARCHER", menu_font, WHITE, 500, 315)
         draw_text("Vitality:     70", small_font, (100, 220, 100), 470, 360)
         draw_text("ATK:    25", small_font, (220, 100, 100), 470, 385)
         draw_text("Ranged attack", small_font, (180, 180, 220), 470, 415)
         draw_text("High ATK", small_font, (180, 180, 220), 470, 440)
-        draw_text("Press ESC to go back", small_font, GRAY, 280, 510)
+        draw_text("Press ESC to go back", small_font, GRAY, 280, 510, center_x=True)
         click = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT: return "quit"
@@ -117,19 +162,20 @@ def run_character_select(ctx):
         if click:
             if kb.collidepoint(mx, my): ctx["chosen_class"] = "knight"; return "playing"
             elif ab.collidepoint(mx, my): ctx["chosen_class"] = "archer"; return "playing"
-        pygame.display.update(); clock.tick(FPS)
+        pygame.display.flip(); clock.tick(FPS)
 
 def run_game_over(ctx):
     reason = ctx.get("reason", "")
     while True:
-        screen.fill(DARK_RED)
-        draw_text("GAME OVER", title_font, (255, 50, 50), 220, 130)
-        draw_text(reason, small_font, WHITE, 50, 230)
-        mx, my = pygame.mouse.get_pos()
+        screen.fill((50, 10, 10))
+        update_display()
+        draw_text("GAME OVER", title_font, (255, 50, 50), 220, 150, center_x=True)
+        draw_text(reason, small_font, (200, 100, 100), 220, 230, center_x=True)
+        mx, my = get_mouse_pos()
         btn_menu = pygame.Rect(300, 320, 200, 55)
         btn_quit = pygame.Rect(300, 420, 200, 55)
-        draw_button(btn_menu, "MAIN MENU", menu_font, btn_menu.collidepoint(mx, my))
-        draw_button(btn_quit, "QUIT",      menu_font, btn_quit.collidepoint(mx, my))
+        draw_button(btn_menu, "MAIN MENU", menu_font, btn_menu.collidepoint(mx, my), center_x=True)
+        draw_button(btn_quit, "QUIT",      menu_font, btn_quit.collidepoint(mx, my), center_x=True)
         click = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT: return "quit"
@@ -139,19 +185,19 @@ def run_game_over(ctx):
         if click:
             if btn_menu.collidepoint(mx, my): return "main_menu"
             elif btn_quit.collidepoint(mx, my): return "quit"
-        pygame.display.update(); clock.tick(FPS)
+        pygame.display.flip()
 
 def run_game_win(ctx):
-    reason = ctx.get("reason", "You have saved the King!")
     while True:
-        screen.fill((50, 200, 50))
-        draw_text("VICTORY!", title_font, WHITE, 220, 130)
-        draw_text(reason, small_font, (20, 20, 20), 200, 230)
-        mx, my = pygame.mouse.get_pos()
+        screen.fill((20, 50, 20))
+        update_display()
+        draw_text("VICTORY!", title_font, (50, 255, 50), 250, 150, center_x=True)
+        draw_text("You have saved the King and the realm!", small_font, (150, 255, 150), 220, 230, center_x=True)
+        mx, my = get_mouse_pos()
         btn_menu = pygame.Rect(300, 320, 200, 55)
         btn_quit = pygame.Rect(300, 420, 200, 55)
-        draw_button(btn_menu, "MAIN MENU", menu_font, btn_menu.collidepoint(mx, my))
-        draw_button(btn_quit, "QUIT",      menu_font, btn_quit.collidepoint(mx, my))
+        draw_button(btn_menu, "MAIN MENU", menu_font, btn_menu.collidepoint(mx, my), center_x=True)
+        draw_button(btn_quit, "QUIT",      menu_font, btn_quit.collidepoint(mx, my), center_x=True)
         click = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT: return "quit"
@@ -161,7 +207,7 @@ def run_game_win(ctx):
         if click:
             if btn_menu.collidepoint(mx, my): return "main_menu"
             elif btn_quit.collidepoint(mx, my): return "quit"
-        pygame.display.update(); clock.tick(FPS)
+        pygame.display.flip()
 
 def handle_pause(my_hero, my_king, my_level):
     opts = ["Resume", "Save Game", "Load Game", "Main Menu", "Quit"]
@@ -169,14 +215,15 @@ def handle_pause(my_hero, my_king, my_level):
         overlay = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SRCALPHA)
         overlay.fill((0, 0, 0, 160))
         screen.blit(overlay, (0, 0))
-        paused_surf = title_font.render("PAUSED", True, WHITE)
-        screen.blit(paused_surf, (SCREEN_WIDTH // 2 - paused_surf.get_width() // 2, 80))
-        mx, my = pygame.mouse.get_pos()
+        update_display()
+        paused_surf = title_font().render("PAUSED", True, WHITE)
+        display_surface.blit(paused_surf, ((display_surface.get_width() - paused_surf.get_width()) // 2, int(80*ui_scale_y)))
+        mx, my = get_mouse_pos()
         rects = []
         for i, opt in enumerate(opts):
-            opt_rect = pygame.Rect(SCREEN_WIDTH // 2 - 120, 200 + i * 65, 240, 50)
-            rects.append(opt_rect)
-            draw_button(opt_rect, opt, small_font, opt_rect.collidepoint(mx, my))
+            r = pygame.Rect(300, 180 + i * 60, 200, 50)
+            rects.append(r)
+            draw_button(r, opt, menu_font, r.collidepoint(mx, my), center_x=True)
         click = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT: return "quit"
@@ -188,14 +235,14 @@ def handle_pause(my_hero, my_king, my_level):
             if rects[0].collidepoint(mx, my): return "resume"
             elif rects[1].collidepoint(mx, my):
                 if save_game(my_hero, my_king, my_level):
-                    saved_surf = menu_font.render("Game Saved!", True, (100, 255, 100))
-                    screen.blit(saved_surf, (SCREEN_WIDTH // 2 - saved_surf.get_width() // 2, SCREEN_HEIGHT - 60))
-                    pygame.display.update(); pygame.time.wait(800)
+                    saved_surf = menu_font().render("Game Saved!", True, (100, 255, 100))
+                    display_surface.blit(saved_surf, ((display_surface.get_width() - saved_surf.get_width()) // 2, int((SCREEN_HEIGHT - 60)*ui_scale_y)))
+                    pygame.display.flip(); pygame.time.wait(800)
                 return "resume"
             elif rects[2].collidepoint(mx, my): return "load"
             elif rects[3].collidepoint(mx, my): return "main_menu"
             elif rects[4].collidepoint(mx, my): return "quit"
-        pygame.display.update(); clock.tick(FPS)
+        pygame.display.flip()
 
 def handle_riddle(guard):
     user_text = ""
@@ -205,14 +252,15 @@ def handle_riddle(guard):
         overlay = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SRCALPHA)
         overlay.fill((0, 0, 0, 180))
         screen.blit(overlay, (0, 0))
-        draw_text("The Guard asks:", menu_font, (255, 220, 100), 50, 60)
+        update_display()
+        draw_text("The Guard asks:", menu_font, (255, 220, 100), 50, 60, center_x=True)
         question = guard.riddle["q"]
         words = question.split()
         lines = []
         cur   = ""
         for w in words:
             test_str = (cur + " " + w).strip()
-            if small_font.size(test_str)[0] < 700:
+            if small_font().size(test_str)[0] < 700:
                 cur = test_str
             else:
                 lines.append(cur)
@@ -220,16 +268,25 @@ def handle_riddle(guard):
         if cur:
             lines.append(cur)
         for i, line in enumerate(lines):
-            draw_text(line, small_font, WHITE, 50, 120 + i * 28)
+            draw_text(line, small_font, WHITE, 50, 120 + i * 28, center_x=True)
         y_input = 120 + len(lines) * 28 + 30
-        draw_text(f"Attempts left: {3 - guard.mistakes}", small_font, (255, 150, 150), 50, y_input)
-        input_box = pygame.Rect(50, y_input + 35, 500, 40)
-        pygame.draw.rect(screen, (40, 40, 60), input_box)
-        pygame.draw.rect(screen, WHITE, input_box, 2)
-        draw_text(user_text + "|", input_font, WHITE, input_box.x + 10, input_box.y + 8)
-        draw_text("Type your answer and press Enter", small_font, GRAY, 50, y_input + 85)
+        draw_text(f"Attempts left: {3 - guard.mistakes}", small_font, (255, 150, 150), 50, y_input, center_x=True)
+        
+        ib_x = int(50 * ui_scale_x)
+        ib_y = int((y_input + 35) * ui_scale_y)
+        ib_w = int(700 * ui_scale_x)
+        ib_h = int(40 * ui_scale_y)
+        input_box = pygame.Rect(ib_x, ib_y, ib_w, ib_h)
+        input_box.centerx = display_surface.get_width() // 2
+        pygame.draw.rect(display_surface, (40, 40, 60), input_box)
+        pygame.draw.rect(display_surface, WHITE, input_box, max(1, int(2 * min(ui_scale_x, ui_scale_y))))
+        
+        txt_surf = input_font().render(user_text + "|", True, WHITE)
+        display_surface.blit(txt_surf, (input_box.x + int(10*ui_scale_x), input_box.y + int(8*ui_scale_y)))
+        
+        draw_text("Type your answer and press Enter", small_font, GRAY, 50, y_input + 85, center_x=True)
         if msg:
-            draw_text(msg, menu_font, (255, 100, 100), 50, y_input + 120)
+            draw_text(msg, menu_font, (255, 100, 100), 50, y_input + 120, center_x=True)
         for event in pygame.event.get():
             if event.type == pygame.QUIT: quit_game()
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and (event.mod & pygame.KMOD_ALT):
@@ -248,12 +305,13 @@ def handle_riddle(guard):
                     user_text = user_text[:-1]
                 elif event.unicode.isprintable() and len(user_text) < 40:
                     user_text += event.unicode
-        pygame.display.update(); clock.tick(FPS)
+        pygame.display.flip()
     return result
 
 def handle_merchant(my_hero, game_ui):
     while True:
-        game_ui.draw_merchant(screen, my_hero)
+        update_display()
+        game_ui.draw_merchant(display_surface, my_hero)
         for event in pygame.event.get():
             if event.type == pygame.QUIT: quit_game()
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and (event.mod & pygame.KMOD_ALT):
@@ -275,13 +333,13 @@ def handle_merchant(my_hero, game_ui):
                     game_ui.show_feedback("+50 Max Vitality!"); return
                 elif event.key == pygame.K_4:
                     return
-        pygame.display.update(); clock.tick(FPS)
+        pygame.display.flip()
 
 def _handle_attack(my_hero, my_level):
     now = pygame.time.get_ticks()
     if now - my_hero.last_attack_time <= my_hero.attack_cooldown:
         return
-    my_hero.attack(my_level.active_enemies, mouse_pos=pygame.mouse.get_pos(), walls=my_level.walls)
+    my_hero.attack(my_level.active_enemies, mouse_pos=get_mouse_pos(), walls=my_level.walls)
     my_hero.last_attack_time = now
 
     attack_rect = my_hero.hitbox.inflate(40, 40)
@@ -317,16 +375,16 @@ def _draw_hud(screen, my_hero, my_level, game_ui, dialogue, nearby_item, nearby_
             hint_text = "This chest is already empty."
         else:
             hint_text = "[E] Open chest"
-        hint_surf = small_font.render(hint_text, True, (255, 220, 100))
-        screen.blit(hint_surf, (SCREEN_WIDTH // 2 - hint_surf.get_width() // 2, SCREEN_HEIGHT - 40))
+        hint_surf = small_font().render(hint_text, True, (255, 220, 100))
+        display_surface.blit(hint_surf, ((display_surface.get_width() - hint_surf.get_width()) // 2, int((SCREEN_HEIGHT - 40)*ui_scale_y)))
     elif nearby_item:
-        hint_surf = small_font.render(f"[E] Pick up: {nearby_item.display_name}", True, WHITE)
-        screen.blit(hint_surf, (SCREEN_WIDTH // 2 - hint_surf.get_width() // 2, SCREEN_HEIGHT - 40))
+        hint_surf = small_font().render(f"[E] Pick up: {nearby_item.display_name}", True, WHITE)
+        display_surface.blit(hint_surf, ((display_surface.get_width() - hint_surf.get_width()) // 2, int((SCREEN_HEIGHT - 40)*ui_scale_y)))
 
     for npc in my_level.active_npcs:
-        if npc.npc_type == "merchant" and my_hero.hitbox.colliderect(npc.hitbox.inflate(60, 60)):
-            hint_surf = small_font.render("[E] Talk to Merchant", True, (255, 215, 0))
-            screen.blit(hint_surf, (SCREEN_WIDTH // 2 - hint_surf.get_width() // 2, SCREEN_HEIGHT - 40))
+        if not npc.is_hostile and my_hero.hitbox.colliderect(npc.hitbox):
+            hint_surf = small_font().render("[E] Talk to Merchant", True, (255, 215, 0))
+            display_surface.blit(hint_surf, ((display_surface.get_width() - hint_surf.get_width()) // 2, int((SCREEN_HEIGHT - 40)*ui_scale_y)))
 
 def run_game_loop(ctx):
     load_data = None
@@ -378,10 +436,6 @@ def run_game_loop(ctx):
             if event.type == pygame.QUIT: return "quit"
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and (event.mod & pygame.KMOD_ALT):
                 toggle_fullscreen(); continue
-
-            # if event.type == pygame.MOUSEBUTTONDOWN and event.button == 3: #Debug purposes
-            #     mx, my = pygame.mouse.get_pos()
-            #     print(f"[CLICK] room={my_level.current_room_name}  x={mx}  y={my}")
 
             if inputs.is_action(event, "pause"):
                 pause_result = handle_pause(my_hero, my_king, my_level)
@@ -518,7 +572,6 @@ def run_game_loop(ctx):
                         npc.dialogue = "You failed the riddle! DIE!"
 
         my_hero.update_projectiles(my_level.active_enemies, my_level.walls, guard=my_level.active_guard, npcs=my_level.active_npcs)
-        # Check if guard was killed by a projectile
         if my_level.active_guard and my_level.active_guard.hp <= 0:
             my_level.active_guard = None
         my_king.update(my_hero.hitbox, my_level.walls)
@@ -527,11 +580,9 @@ def run_game_loop(ctx):
 
         for enemy in my_level.active_enemies:
             enemy.update(my_hero.hitbox, my_level.walls)
-
             edx = my_hero.hitbox.centerx - enemy.hitbox.centerx
             edy = my_hero.hitbox.centery - enemy.hitbox.centery
             dist_to_hero = math.sqrt(edx**2 + edy**2)
-
             if dist_to_hero <= enemy.attack_range:
                 if now - enemy.last_attack_time > enemy.attack_cooldown:
                     my_hero.take_damage(enemy.attack_power)
@@ -582,12 +633,23 @@ def run_game_loop(ctx):
         my_level.draw(screen)
         my_king.draw(screen)
         my_hero.draw(screen)
-        game_ui.draw(screen, my_hero, my_level)
-        my_king.draw_hp_bar(screen)
-        dialogue.draw(screen)
-        _draw_hud(screen, my_hero, my_level, game_ui, dialogue, nearby_item, nearby_chest)
 
-        pygame.display.update()
+        update_display()
+        
+        my_king.draw_hp_bar(display_surface, ui_scale_x, ui_scale_y)
+        
+        for npc in my_level.active_npcs:
+            npc.draw_ui(display_surface, ui_scale_x, ui_scale_y)
+        if my_level.active_guard:
+            my_level.active_guard.draw_ui(display_surface, ui_scale_x, ui_scale_y)
+
+        game_ui.update_scale(ui_scale_x, ui_scale_y)
+        dialogue.update_scale(ui_scale_x, ui_scale_y)
+        game_ui.draw(display_surface, my_hero, my_level)
+        dialogue.draw(display_surface)
+        _draw_hud(display_surface, my_hero, my_level, game_ui, dialogue, nearby_item, nearby_chest)
+
+        pygame.display.flip()
         clock.tick(FPS)
 
 def main():
