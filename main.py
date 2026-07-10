@@ -38,9 +38,12 @@ def quit_game():
     pygame.quit()
     sys.exit()
 
+def toggle_fullscreen():
+    pygame.display.toggle_fullscreen()
+
 def run_main_menu(ctx):
     while True:
-        screen.fill(BLACK)
+        screen.fill((20, 20, 40))
         draw_text("SAVE THE KING!", title_font, WHITE, 150, 120)
         mx, my = pygame.mouse.get_pos()
         btn_play = pygame.Rect(300, 250, 200, 55)
@@ -58,6 +61,8 @@ def run_main_menu(ctx):
         click = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT: return "quit"
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and (event.mod & pygame.KMOD_ALT):
+                toggle_fullscreen(); continue
             if inputs.is_action(event, "click"): click = True
         if click:
             if btn_play.collidepoint(mx, my): return "character_select"
@@ -89,7 +94,7 @@ def run_character_select(ctx):
         draw_text("Vitality:    100", small_font, (100, 220, 100), 110, 360)
         draw_text("ATK:    20", small_font, (220, 100, 100), 110, 385)
         draw_text("Melee attack", small_font, (180, 180, 220), 110, 415)
-        draw_text("High armor", small_font, (180, 180, 220), 110, 440)
+        draw_text("High vitality", small_font, (180, 180, 220), 110, 440)
         pygame.draw.rect(screen, (40, 40, 80), ab, border_radius=12)
         pygame.draw.rect(screen, GREEN if ab.collidepoint(mx, my) else (100, 100, 160), ab, 3, border_radius=12)
         if char_sprite:
@@ -105,6 +110,8 @@ def run_character_select(ctx):
         click = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT: return "quit"
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and (event.mod & pygame.KMOD_ALT):
+                toggle_fullscreen(); continue
             if inputs.is_action(event, "click"): click = True
             if inputs.is_action(event, "back"): return "main_menu"
         if click:
@@ -126,6 +133,8 @@ def run_game_over(ctx):
         click = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT: return "quit"
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and (event.mod & pygame.KMOD_ALT):
+                toggle_fullscreen(); continue
             if inputs.is_action(event, "click"): click = True
         if click:
             if btn_menu.collidepoint(mx, my): return "main_menu"
@@ -146,6 +155,8 @@ def run_game_win(ctx):
         click = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT: return "quit"
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and (event.mod & pygame.KMOD_ALT):
+                toggle_fullscreen(); continue
             if inputs.is_action(event, "click"): click = True
         if click:
             if btn_menu.collidepoint(mx, my): return "main_menu"
@@ -169,6 +180,8 @@ def handle_pause(my_hero, my_king, my_level):
         click = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT: return "quit"
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and (event.mod & pygame.KMOD_ALT):
+                toggle_fullscreen(); continue
             if inputs.is_action(event, "pause"): return "resume"
             if inputs.is_action(event, "click"): click = True
         if click:
@@ -219,6 +232,8 @@ def handle_riddle(guard):
             draw_text(msg, menu_font, (255, 100, 100), 50, y_input + 120)
         for event in pygame.event.get():
             if event.type == pygame.QUIT: quit_game()
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and (event.mod & pygame.KMOD_ALT):
+                toggle_fullscreen(); continue
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN and user_text.strip():
                     ans = guard.answer(user_text)
@@ -241,6 +256,8 @@ def handle_merchant(my_hero, game_ui):
         game_ui.draw_merchant(screen, my_hero)
         for event in pygame.event.get():
             if event.type == pygame.QUIT: quit_game()
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and (event.mod & pygame.KMOD_ALT):
+                toggle_fullscreen(); continue
             if inputs.is_action(event, "interact"): return
             if event.type == pygame.KEYDOWN and "gold coin" in my_hero.inventory:
                 if event.key == pygame.K_1:
@@ -359,6 +376,8 @@ def run_game_loop(ctx):
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT: return "quit"
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN and (event.mod & pygame.KMOD_ALT):
+                toggle_fullscreen(); continue
 
             # if event.type == pygame.MOUSEBUTTONDOWN and event.button == 3: #Debug purposes
             #     mx, my = pygame.mouse.get_pos()

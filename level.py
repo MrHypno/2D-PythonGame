@@ -72,7 +72,7 @@ class Level:
         self.world_maps = {
 
             "ambush area": {
-                "tmx": "adsız.tmx",
+                "tmx": "ambush_area.tmx",
                 "region": "forest",
                 "west": "forest", "east": "woods",
                 "name": "Ambush Area",
