@@ -1,25 +1,27 @@
+from config import ASSETS_DIR
+import os
 import pygame
 import math
 
 _ENEMY_SPRITES = {
     "bandit": {
-        "idle":   "assets/Skeleton01_01_S_Idle.png",
-        "walk":   "assets/Skeleton01_01_S_Walk.png",
-        "attack": "assets/Skeleton01_01_S_Attack01.png",
+        "idle":   f"{ASSETS_DIR}/Skeleton01_01_S_Idle.png",
+        "walk":   f"{ASSETS_DIR}/Skeleton01_01_S_Walk.png",
+        "attack": f"{ASSETS_DIR}/Skeleton01_01_S_Attack01.png",
         "frame_size": 48,
         "display_size": (64, 64),
     },
     "archer bandit": {
-        "idle":   "assets/BrittleArcher.png",
-        "walk":   "assets/BrittleArcher.png",
-        "attack": "assets/BrittleArcher.png",
+        "idle":   f"{ASSETS_DIR}/BrittleArcher.png",
+        "walk":   f"{ASSETS_DIR}/BrittleArcher.png",
+        "attack": f"{ASSETS_DIR}/BrittleArcher.png",
         "frame_size": 16,
         "display_size": (48, 48),
     },
     "bandit leader": {
-        "idle":   "assets/bearzodiac_idle.png",
-        "walk":   "assets/bearzodiac_walk.png",
-        "attack": "assets/bearzodiac_attack.png",
+        "idle":   f"{ASSETS_DIR}/bearzodiac_idle.png",
+        "walk":   f"{ASSETS_DIR}/bearzodiac_walk.png",
+        "attack": f"{ASSETS_DIR}/bearzodiac_attack.png",
         "frame_size": 48,
         "display_size": (128, 128),
     },

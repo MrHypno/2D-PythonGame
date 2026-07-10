@@ -1,0 +1,633 @@
+([('SDL2.dll',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\SDL2.dll',
+   'BINARY'),
+  ('SDL2_image.dll',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\SDL2_image.dll',
+   'BINARY'),
+  ('SDL2_mixer.dll',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\SDL2_mixer.dll',
+   'BINARY'),
+  ('SDL2_ttf.dll',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\SDL2_ttf.dll',
+   'BINARY'),
+  ('SaveTheKing.exe',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\build\\SaveTheKing\\SaveTheKing.exe',
+   'EXECUTABLE'),
+  ('VCRUNTIME140.dll',
+   'C:\\Users\\gorke\\AppData\\Local\\Programs\\Python\\Python313\\VCRUNTIME140.dll',
+   'BINARY'),
+  ('VCRUNTIME140_1.dll',
+   'C:\\Users\\gorke\\AppData\\Local\\Programs\\Python\\Python313\\VCRUNTIME140_1.dll',
+   'BINARY'),
+  ('_bz2.pyd',
+   'C:\\Users\\gorke\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_bz2.pyd',
+   'EXTENSION'),
+  ('_ctypes.pyd',
+   'C:\\Users\\gorke\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_ctypes.pyd',
+   'EXTENSION'),
+  ('_decimal.pyd',
+   'C:\\Users\\gorke\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_decimal.pyd',
+   'EXTENSION'),
+  ('_elementtree.pyd',
+   'C:\\Users\\gorke\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_elementtree.pyd',
+   'EXTENSION'),
+  ('_hashlib.pyd',
+   'C:\\Users\\gorke\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_hashlib.pyd',
+   'EXTENSION'),
+  ('_lzma.pyd',
+   'C:\\Users\\gorke\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_lzma.pyd',
+   'EXTENSION'),
+  ('_queue.pyd',
+   'C:\\Users\\gorke\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_queue.pyd',
+   'EXTENSION'),
+  ('_socket.pyd',
+   'C:\\Users\\gorke\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_socket.pyd',
+   'EXTENSION'),
+  ('_ssl.pyd',
+   'C:\\Users\\gorke\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_ssl.pyd',
+   'EXTENSION'),
+  ('_wmi.pyd',
+   'C:\\Users\\gorke\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\_wmi.pyd',
+   'EXTENSION'),
+  ('assets\\BrittleArcher.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\BrittleArcher.png',
+   'DATA'),
+  ('assets\\HighElf_M_Idle + Walk_1.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\HighElf_M_Idle + Walk_1.png',
+   'DATA'),
+  ('assets\\HighElf_M_Idle + Walk_2.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\HighElf_M_Idle + Walk_2.png',
+   'DATA'),
+  ('assets\\HighElf_M_Idle + Walk_3.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\HighElf_M_Idle + Walk_3.png',
+   'DATA'),
+  ('assets\\HighElf_M_Idle + Walk_4.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\HighElf_M_Idle + Walk_4.png',
+   'DATA'),
+  ('assets\\NormalCleric_Idle + Walk_1.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\NormalCleric_Idle + Walk_1.png',
+   'DATA'),
+  ('assets\\NormalCleric_Idle + Walk_2.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\NormalCleric_Idle + Walk_2.png',
+   'DATA'),
+  ('assets\\NormalCleric_Idle + Walk_3.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\NormalCleric_Idle + Walk_3.png',
+   'DATA'),
+  ('assets\\NormalCleric_Idle + Walk_4.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\NormalCleric_Idle + Walk_4.png',
+   'DATA'),
+  ('assets\\Skeleton01_01_S_Attack01.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\Skeleton01_01_S_Attack01.png',
+   'DATA'),
+  ('assets\\Skeleton01_01_S_Idle.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\Skeleton01_01_S_Idle.png',
+   'DATA'),
+  ('assets\\Skeleton01_01_S_Walk.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\Skeleton01_01_S_Walk.png',
+   'DATA'),
+  ('assets\\Wizard_Idle + Walk_1.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\Wizard_Idle + Walk_1.png',
+   'DATA'),
+  ('assets\\Wizard_Idle + Walk_2.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\Wizard_Idle + Walk_2.png',
+   'DATA'),
+  ('assets\\Wizard_Idle + Walk_3.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\Wizard_Idle + Walk_3.png',
+   'DATA'),
+  ('assets\\Wizard_Idle + Walk_4.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\Wizard_Idle + Walk_4.png',
+   'DATA'),
+  ('assets\\armor.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\armor.png',
+   'DATA'),
+  ('assets\\bandage.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\bandage.png',
+   'DATA'),
+  ('assets\\bearzodiac_attack.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\bearzodiac_attack.png',
+   'DATA'),
+  ('assets\\bearzodiac_idle.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\bearzodiac_idle.png',
+   'DATA'),
+  ('assets\\bearzodiac_walk.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\bearzodiac_walk.png',
+   'DATA'),
+  ('assets\\chest_01.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\chest_01.png',
+   'DATA'),
+  ('assets\\demorden_attack.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\demorden_attack.png',
+   'DATA'),
+  ('assets\\demorden_idle.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\demorden_idle.png',
+   'DATA'),
+  ('assets\\demorden_walk.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\demorden_walk.png',
+   'DATA'),
+  ('assets\\gladius_attack.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\gladius_attack.png',
+   'DATA'),
+  ('assets\\gladius_idle.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\gladius_idle.png',
+   'DATA'),
+  ('assets\\gladius_walk.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\gladius_walk.png',
+   'DATA'),
+  ('assets\\gold_coin.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\gold_coin.png',
+   'DATA'),
+  ('assets\\gold_key.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\gold_key.png',
+   'DATA'),
+  ('assets\\herbs.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\herbs.png',
+   'DATA'),
+  ('assets\\key.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\key.png',
+   'DATA'),
+  ('assets\\map\\abandoned_camp.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\abandoned_camp.tmx',
+   'DATA'),
+  ('assets\\map\\ambush_area.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\ambush_area.tmx',
+   'DATA'),
+  ('assets\\map\\bandit_camp.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\bandit_camp.tmx',
+   'DATA'),
+  ('assets\\map\\big_house_bedroom.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\big_house_bedroom.tmx',
+   'DATA'),
+  ('assets\\map\\big_house_enterance.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\big_house_enterance.tmx',
+   'DATA'),
+  ('assets\\map\\big_house_guest_room.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\big_house_guest_room.tmx',
+   'DATA'),
+  ('assets\\map\\big_house_hallway.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\big_house_hallway.tmx',
+   'DATA'),
+  ('assets\\map\\big_house_kitchen.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\big_house_kitchen.tmx',
+   'DATA'),
+  ('assets\\map\\cliffs.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\cliffs.tmx',
+   'DATA'),
+  ('assets\\map\\deep_forest.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\deep_forest.tmx',
+   'DATA'),
+  ('assets\\map\\deep_forest2.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\deep_forest2.tmx',
+   'DATA'),
+  ('assets\\map\\forest.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\forest.tmx',
+   'DATA'),
+  ('assets\\map\\forest2.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\forest2.tmx',
+   'DATA'),
+  ('assets\\map\\forest3.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\forest3.tmx',
+   'DATA'),
+  ('assets\\map\\forest4.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\forest4.tmx',
+   'DATA'),
+  ('assets\\map\\grass.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\grass.png',
+   'DATA'),
+  ('assets\\map\\guards.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\guards.tmx',
+   'DATA'),
+  ('assets\\map\\interior_tiles.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\interior_tiles.png',
+   'DATA'),
+  ('assets\\map\\interior_tiles.tsx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\interior_tiles.tsx',
+   'DATA'),
+  ('assets\\map\\lighted_road.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\lighted_road.tmx',
+   'DATA'),
+  ('assets\\map\\middle_house_bedroom.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\middle_house_bedroom.tmx',
+   'DATA'),
+  ('assets\\map\\middle_house_enterance.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\middle_house_enterance.tmx',
+   'DATA'),
+  ('assets\\map\\middle_house_kitchen.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\middle_house_kitchen.tmx',
+   'DATA'),
+  ('assets\\map\\middle_house_workshop.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\middle_house_workshop.tmx',
+   'DATA'),
+  ('assets\\map\\old_road.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\old_road.tmx',
+   'DATA'),
+  ('assets\\map\\old_road2.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\old_road2.tmx',
+   'DATA'),
+  ('assets\\map\\plains.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\plains.png',
+   'DATA'),
+  ('assets\\map\\plains.tsx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\plains.tsx',
+   'DATA'),
+  ('assets\\map\\road.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\road.tmx',
+   'DATA'),
+  ('assets\\map\\road2.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\road2.tmx',
+   'DATA'),
+  ('assets\\map\\road3.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\road3.tmx',
+   'DATA'),
+  ('assets\\map\\road4.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\road4.tmx',
+   'DATA'),
+  ('assets\\map\\safe_road.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\safe_road.tmx',
+   'DATA'),
+  ('assets\\map\\safe_road2.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\safe_road2.tmx',
+   'DATA'),
+  ('assets\\map\\town_hall_archives.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\town_hall_archives.tmx',
+   'DATA'),
+  ('assets\\map\\town_hall_council_chamber.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\town_hall_council_chamber.tmx',
+   'DATA'),
+  ('assets\\map\\town_hall_courtroom.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\town_hall_courtroom.tmx',
+   'DATA'),
+  ('assets\\map\\town_hall_enterance.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\town_hall_enterance.tmx',
+   'DATA'),
+  ('assets\\map\\town_hall_hallway.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\town_hall_hallway.tmx',
+   'DATA'),
+  ('assets\\map\\town_hall_mayors_office.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\town_hall_mayors_office.tmx',
+   'DATA'),
+  ('assets\\map\\town_hall_storage.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\town_hall_storage.tmx',
+   'DATA'),
+  ('assets\\map\\town_hall_treasury.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\town_hall_treasury.tmx',
+   'DATA'),
+  ('assets\\map\\town_house_bedroom.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\town_house_bedroom.tmx',
+   'DATA'),
+  ('assets\\map\\town_house_enterance.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\town_house_enterance.tmx',
+   'DATA'),
+  ('assets\\map\\town_house_larder.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\town_house_larder.tmx',
+   'DATA'),
+  ('assets\\map\\town_square.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\town_square.tmx',
+   'DATA'),
+  ('assets\\map\\woods.tmx',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\map\\woods.tmx',
+   'DATA'),
+  ('assets\\player.png',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\player.png',
+   'DATA'),
+  ('assets\\sounds\\bow_attack.wav',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\sounds\\bow_attack.wav',
+   'DATA'),
+  ('assets\\sounds\\bow_hit.wav',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\sounds\\bow_hit.wav',
+   'DATA'),
+  ('assets\\sounds\\chest_close.wav',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\sounds\\chest_close.wav',
+   'DATA'),
+  ('assets\\sounds\\chest_open.wav',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\sounds\\chest_open.wav',
+   'DATA'),
+  ('assets\\sounds\\sword_attack_1.wav',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\sounds\\sword_attack_1.wav',
+   'DATA'),
+  ('assets\\sounds\\sword_attack_2.wav',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\sounds\\sword_attack_2.wav',
+   'DATA'),
+  ('assets\\sounds\\sword_hit.wav',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\sounds\\sword_hit.wav',
+   'DATA'),
+  ('assets\\sounds\\unlock.wav',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\assets\\sounds\\unlock.wav',
+   'DATA'),
+  ('base_library.zip',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\build\\SaveTheKing\\base_library.zip',
+   'DATA'),
+  ('freetype.dll',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\freetype.dll',
+   'BINARY'),
+  ('libcrypto-3.dll',
+   'C:\\Users\\gorke\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\libcrypto-3.dll',
+   'BINARY'),
+  ('libffi-8.dll',
+   'C:\\Users\\gorke\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\libffi-8.dll',
+   'BINARY'),
+  ('libjpeg-9.dll',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\libjpeg-9.dll',
+   'BINARY'),
+  ('libmodplug-1.dll',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\libmodplug-1.dll',
+   'BINARY'),
+  ('libogg-0.dll',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\libogg-0.dll',
+   'BINARY'),
+  ('libopus-0.dll',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\libopus-0.dll',
+   'BINARY'),
+  ('libopusfile-0.dll',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\libopusfile-0.dll',
+   'BINARY'),
+  ('libpng16-16.dll',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\libpng16-16.dll',
+   'BINARY'),
+  ('libssl-3.dll',
+   'C:\\Users\\gorke\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\libssl-3.dll',
+   'BINARY'),
+  ('libtiff-5.dll',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\libtiff-5.dll',
+   'BINARY'),
+  ('libwebp-7.dll',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\libwebp-7.dll',
+   'BINARY'),
+  ('portmidi.dll',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\portmidi.dll',
+   'BINARY'),
+  ('pyexpat.pyd',
+   'C:\\Users\\gorke\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\pyexpat.pyd',
+   'EXTENSION'),
+  ('pygame\\SDL2.dll',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\SDL2.dll',
+   'BINARY'),
+  ('pygame\\SDL2_image.dll',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\SDL2_image.dll',
+   'BINARY'),
+  ('pygame\\SDL2_mixer.dll',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\SDL2_mixer.dll',
+   'BINARY'),
+  ('pygame\\SDL2_ttf.dll',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\SDL2_ttf.dll',
+   'BINARY'),
+  ('pygame\\_freetype.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\_freetype.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\base.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\base.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\bufferproxy.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\bufferproxy.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\color.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\color.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\constants.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\constants.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\display.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\display.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\draw.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\draw.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\event.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\event.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\font.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\font.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\freesansbold.ttf',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\freesansbold.ttf',
+   'DATA'),
+  ('pygame\\freetype.dll',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\freetype.dll',
+   'BINARY'),
+  ('pygame\\image.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\image.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\imageext.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\imageext.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\joystick.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\joystick.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\key.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\key.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\libjpeg-9.dll',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\libjpeg-9.dll',
+   'BINARY'),
+  ('pygame\\libogg-0.dll',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\libogg-0.dll',
+   'BINARY'),
+  ('pygame\\libopus-0.dll',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\libopus-0.dll',
+   'BINARY'),
+  ('pygame\\libpng16-16.dll',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\libpng16-16.dll',
+   'BINARY'),
+  ('pygame\\mask.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\mask.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\math.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\math.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\mixer.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\mixer.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\mixer_music.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\mixer_music.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\mouse.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\mouse.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\pixelarray.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\pixelarray.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\pixelcopy.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\pixelcopy.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\pygame_icon.bmp',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\pygame_icon.bmp',
+   'DATA'),
+  ('pygame\\rect.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\rect.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\rwobject.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\rwobject.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\scrap.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\scrap.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\surface.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\surface.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\surflock.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\surflock.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\time.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\time.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\transform.cp313-win_amd64.pyd',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\transform.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('pygame\\zlib1.dll',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\zlib1.dll',
+   'BINARY'),
+  ('python313.dll',
+   'C:\\Users\\gorke\\AppData\\Local\\Programs\\Python\\Python313\\python313.dll',
+   'BINARY'),
+  ('select.pyd',
+   'C:\\Users\\gorke\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\select.pyd',
+   'EXTENSION'),
+  ('unicodedata.pyd',
+   'C:\\Users\\gorke\\AppData\\Local\\Programs\\Python\\Python313\\DLLs\\unicodedata.pyd',
+   'EXTENSION'),
+  ('zlib1.dll',
+   'C:\\Users\\gorke\\OneDrive\\Masaüstü\\Digital Game '
+   'Design\\Programming\\2D-PythonGame\\.venv\\Lib\\site-packages\\pygame\\zlib1.dll',
+   'BINARY')],)

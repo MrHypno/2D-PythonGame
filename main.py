@@ -1,3 +1,5 @@
+from config import ASSETS_DIR
+import os
 import pygame, sys
 import math
 #import random
@@ -18,7 +20,7 @@ pygame.display.set_caption("Save the King!")
 clock = pygame.time.Clock()
 is_fullscreen = False
 
-chest_open = pygame.mixer.Sound("assets/sounds/chest_open.wav")
+chest_open = pygame.mixer.Sound(f"{ASSETS_DIR}/sounds/chest_open.wav")
 
 ui_scale_x = 1.0
 ui_scale_y = 1.0
@@ -113,7 +115,7 @@ def run_main_menu(ctx):
 
 def run_character_select(ctx):
     try:
-        _sheet = pygame.image.load("assets/player.png").convert_alpha()
+        _sheet = pygame.image.load(f"{ASSETS_DIR}/player.png").convert_alpha()
         _frame = _sheet.subsurface(pygame.Rect(0, 0, 48, 48))
         char_sprite = pygame.transform.scale(_frame, (96, 96))
     except Exception:

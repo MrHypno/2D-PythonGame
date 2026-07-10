@@ -1,3 +1,5 @@
+from config import ASSETS_DIR
+import os
 import pygame
 import math
 import random
@@ -50,7 +52,7 @@ class Player:
         self.max_armor = 50
         self.current_armor = 0
 
-        self.full_sheet = pygame.image.load("assets/player.png").convert_alpha()
+        self.full_sheet = pygame.image.load(f"{ASSETS_DIR}/player.png").convert_alpha()
         self.frame_width = 48
         self.frame_height = 48
         self.display_size = (80, 80)
@@ -72,10 +74,10 @@ class Player:
 
         self.projectiles = []
         self.sword_swing = [
-            pygame.mixer.Sound("assets/sounds/sword_attack_1.wav"),
-            pygame.mixer.Sound("assets/sounds/sword_attack_2.wav")
+            pygame.mixer.Sound(f"{ASSETS_DIR}/sounds/sword_attack_1.wav"),
+            pygame.mixer.Sound(f"{ASSETS_DIR}/sounds/sword_attack_2.wav")
         ]
-        self.sword_hit = pygame.mixer.Sound("assets/sounds/sword_hit.wav")
+        self.sword_hit = pygame.mixer.Sound(f"{ASSETS_DIR}/sounds/sword_hit.wav")
 
     def _get_frame(self, col, row):
         rect  = pygame.Rect(col * self.frame_width, row * self.frame_height,
@@ -247,8 +249,8 @@ class Archer(Player):
     def __init__(self, x, y):
         super().__init__(x, y, "Archer", hp=70, attack_power=25)
         self.attack_cooldown = 400
-        self.bow_attack = pygame.mixer.Sound("assets/sounds/bow_attack.wav")
-        self.bow_hit = pygame.mixer.Sound("assets/sounds/bow_hit.wav")
+        self.bow_attack = pygame.mixer.Sound(f"{ASSETS_DIR}/sounds/bow_attack.wav")
+        self.bow_hit = pygame.mixer.Sound(f"{ASSETS_DIR}/sounds/bow_hit.wav")
 
     def attack(self, enemies, mouse_pos=None, walls=None):
         if not mouse_pos:

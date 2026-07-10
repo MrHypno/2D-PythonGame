@@ -1,3 +1,5 @@
+from config import ASSETS_DIR
+import os
 import pygame
 from item import Item, Chest
 from enemy import Enemy
@@ -48,11 +50,11 @@ def read_tmx(tmx_path):
 
 class Level:
     def __init__(self):
-        self.grass_image = pygame.image.load("assets/map/grass.png").convert()
+        self.grass_image = pygame.image.load(f"{ASSETS_DIR}/map/grass.png").convert()
         self.grass_image = pygame.transform.scale(self.grass_image, (TILE_SIZE, TILE_SIZE))
-        self.tileset_images = load_tileset_and_scale("assets/map/plains.png", original_size=16, target_size=40, columns=6)
+        self.tileset_images = load_tileset_and_scale(f"{ASSETS_DIR}/map/plains.png", original_size=16, target_size=40, columns=6)
         try:
-            self.interior_tileset = load_tileset_and_scale("assets/map/interior_tiles.png", original_size=16, target_size=40, columns=48)
+            self.interior_tileset = load_tileset_and_scale(f"{ASSETS_DIR}/map/interior_tiles.png", original_size=16, target_size=40, columns=48)
         except FileNotFoundError:
             self.interior_tileset = {}
 
@@ -65,7 +67,7 @@ class Level:
             field_sheet = pygame.Surface((80, 240)); field_sheet.fill((50,200,50))
 
         self.unlocked_doors = set()
-        self.unlock_door = pygame.mixer.Sound("assets/sounds/unlock.wav")
+        self.unlock_door = pygame.mixer.Sound(f"{ASSETS_DIR}/sounds/unlock.wav")
 
         self.bandit_camp_cleared = False
 
@@ -1379,7 +1381,7 @@ class Level:
                                                   TILE_SIZE, TILE_SIZE))
                     
     def load_region(self, tmx_filename):
-        dosya_yolu = f"assets/map/{tmx_filename}"
+        dosya_yolu = f"{ASSETS_DIR}/map/{tmx_filename}"
         self.map_layers = read_tmx(dosya_yolu)
 
     def load_room(self, room_name):

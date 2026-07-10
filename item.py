@@ -1,3 +1,5 @@
+from config import ASSETS_DIR
+import os
 import pygame
 import random
 
@@ -56,12 +58,12 @@ class Item:
     def _load_images(cls):
         if not cls._images:
             image_paths = {
-                "gold coin": "assets/gold_coin.png",
-                "key": "assets/key.png",
-                "golden key": "assets/gold_key.png",
-                "herbs": "assets/herbs.png",
-                "armor": "assets/armor.png",
-                "bandage": "assets/bandage.png"
+                "gold coin": f"{ASSETS_DIR}/gold_coin.png",
+                "key": f"{ASSETS_DIR}/key.png",
+                "golden key": f"{ASSETS_DIR}/gold_key.png",
+                "herbs": f"{ASSETS_DIR}/herbs.png",
+                "armor": f"{ASSETS_DIR}/armor.png",
+                "bandage": f"{ASSETS_DIR}/bandage.png"
             }
             for name, path in image_paths.items():
                 try:
@@ -96,7 +98,7 @@ class Chest:
         if cls._frames is not None:
             return
         try:
-            sheet = pygame.image.load("assets/chest_01.png").convert_alpha()
+            sheet = pygame.image.load(f"{ASSETS_DIR}/chest_01.png").convert_alpha()
             cls._frames = []
             for i in range(4):
                 frame = sheet.subsurface(pygame.Rect(i * 16, 0, 16, 16))

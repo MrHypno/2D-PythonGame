@@ -1,3 +1,5 @@
+from config import ASSETS_DIR
+import os
 import pygame
 import math
 import random
@@ -45,7 +47,7 @@ class King:
         self._bar_font = pygame.font.SysFont("arial", 13)
         self._label_surf = self._label_font.render("KING", True, (255, 255, 255))
 
-        self._frames = _load_frame_files("assets/HighElf_M_Idle + Walk_*.png", 4, 32, self.display_size)
+        self._frames = _load_frame_files(f"{ASSETS_DIR}/HighElf_M_Idle + Walk_*.png", 4, 32, self.display_size)
         self._has_sprites = len(self._frames) > 0
         self._frame_idx = 0.0
         self._anim_speed = 0.08
@@ -192,9 +194,9 @@ class Guard:
             prefix = "demorden"
             self._frame_size = 32
         try:
-            self._idle_sheet = pygame.image.load(f"assets/{prefix}_idle.png").convert_alpha()
-            self._walk_sheet = pygame.image.load(f"assets/{prefix}_walk.png").convert_alpha()
-            self._attack_sheet = pygame.image.load(f"assets/{prefix}_attack.png").convert_alpha()
+            self._idle_sheet = pygame.image.load(f"{ASSETS_DIR}/{prefix}_idle.png").convert_alpha()
+            self._walk_sheet = pygame.image.load(f"{ASSETS_DIR}/{prefix}_walk.png").convert_alpha()
+            self._attack_sheet = pygame.image.load(f"{ASSETS_DIR}/{prefix}_attack.png").convert_alpha()
             self._has_sprites = True
         except Exception:
             self._has_sprites = False
@@ -381,19 +383,19 @@ class NPC:
         # knight uses spritesheet, villager/merchant use individual frames
         if npc_type == "knight":
             try:
-                self._idle_sheet = pygame.image.load("assets/demorden_idle.png").convert_alpha()
-                self._walk_sheet = pygame.image.load("assets/demorden_walk.png").convert_alpha()
-                self._attack_sheet = pygame.image.load("assets/demorden_attack.png").convert_alpha()
+                self._idle_sheet = pygame.image.load(f"{ASSETS_DIR}/demorden_idle.png").convert_alpha()
+                self._walk_sheet = pygame.image.load(f"{ASSETS_DIR}/demorden_walk.png").convert_alpha()
+                self._attack_sheet = pygame.image.load(f"{ASSETS_DIR}/demorden_attack.png").convert_alpha()
                 self._has_sheet = True
                 self._has_sprites = True
             except Exception:
                 pass
         elif npc_type == "villager":
-            self._ind_frames = _load_frame_files("assets/NormalCleric_Idle + Walk_*.png", 4, 32, self.display_size)
+            self._ind_frames = _load_frame_files(f"{ASSETS_DIR}/NormalCleric_Idle + Walk_*.png", 4, 32, self.display_size)
             if self._ind_frames:
                 self._has_sprites = True
         elif npc_type == "merchant":
-            self._ind_frames = _load_frame_files("assets/Wizard_Idle + Walk_*.png", 4, 32, self.display_size)
+            self._ind_frames = _load_frame_files(f"{ASSETS_DIR}/Wizard_Idle + Walk_*.png", 4, 32, self.display_size)
             if self._ind_frames:
                 self._has_sprites = True
 
